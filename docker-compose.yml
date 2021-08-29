@@ -1,0 +1,41 @@
+version: '3.3'
+services:
+  db:
+    image: 'postgres'
+    hostname: 'localhost'
+    container_name: 'sql-container-yml'
+    restart: 'always'
+    environment:
+      POSTGRES_DB: 'postgres'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: '1234'
+    ports:
+      # <Port exposed> : < sql Port running inside container>
+      - '5432:5431'
+    expose:
+      # Opens port 5431 on the container
+      - '5431'
+    volumes:
+      # Where our data will be persisted
+      - my-db:/var/lib/postgres
+  web:
+    hostname: 'localhost'
+    container_name: 'virtualzoo-container'
+    build: ./
+    image: "virtualzoo-image"
+    # Just link the database with the web application
+    links:
+      - db:postgres
+    ports:
+      - '8888:8888'
+    environment:
+      - WAIT_HOSTS=localhost:5432
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_HOST_CONNECT_TIMEOUT=30
+    depends_on:
+      - db
+# The volume holds any data you may have on a database when you delete the container
+# Just type : docker volume ls to see the created volumes
+volumes:
+    my-db:
