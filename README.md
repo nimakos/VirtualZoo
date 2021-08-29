@@ -15,25 +15,27 @@ Web Service Application
 # Build and run project without Docker container
 **1.** Go to DataSourceConfig.java, and select the getDatasourceAddress()
 
-**2.** Build jar file with Maven tool (exclude tests)
+**2.** Build jar file with Maven tool (exclude test cases)
 mvn -Dmaven.test.skip=true clean install
 
-**3.** Run project
+**3.** Start Application.
 java -jar ./web/target/virtualZoo.jar
 
-**4.** Open a web browser and type http://localhost:8888/myZoo/animals/all (You can change the ip address and the port from the properties file)
+**4.** Run Application
+Open a web browser and type http://localhost:8888/myZoo/animals/all (You can change the ip address and the port from the properties file)
 
 
 # Docker -Build and run a container with Sql Server and application Images (with running docker-compose.yml script)
 **1.** Go to DataSourceConfig.java, and select the getDatasourceAddress2()
 
-**2.** Build jar file with Maven tool (exclude tests)
+**2.** Build jar file with Maven tool (exclude test cases)
 mvn -Dmaven.test.skip=true clean install
 
-**3.** Create Docker with Images (Running docker-compose.yml script)
+**3.** Start Application. Create Docker Images (Running docker-compose.yml script)
 docker-compose up
 
-**4.** Open a web browser and type http://localhost:8888/myZoo/animals/all (You can change the ip address and the port from the .yml file)
+**4.** Run Application
+Open a web browser and type http://localhost:8888/myZoo/animals/all (You can change the ip address and the port from the .yml file)
 
 
 # Docker -Build and run a container with application Image but with no Sql Server (running all localhost)
