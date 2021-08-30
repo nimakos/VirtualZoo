@@ -13,7 +13,7 @@ Container : Docker hub
 Web Service Application
 
 # Build and run project without Docker container
-**1.** Go to DataSourceConfig.java, and select the getDatasourceAddress()
+**1.** Go to DataSourceConfig.java, and select the getDatasourceAddress() (You can change the datasource properties from the properties file)
 
 **2.** Build jar file with Maven tool (exclude test cases)
 mvn -Dmaven.test.skip=true clean install
@@ -26,7 +26,7 @@ Open a web browser and type http://localhost:8888/myZoo/animals/all (You can cha
 
 
 # Docker -Build and run a container with Sql Server and application Images (with running docker-compose.yml script)
-**1.** Go to DataSourceConfig.java, and select the getDatasourceAddress2()
+**1.** Go to DataSourceConfig.java, and select the getDatasourceAddress2() (You can change the datasource properties from the properties file)
 
 **2.** Build jar file with Maven tool (exclude test cases)
 mvn -Dmaven.test.skip=true clean install
@@ -39,7 +39,7 @@ Open a web browser and type http://localhost:8888/myZoo/animals/all (You can cha
 
 
 # Docker -Build and run a container with application Image but with no Sql Server (running all localhost)
-**1.**  make primary mySqlDataSource() method and put getDatasourceAddress()
+**1.**  make primary mySqlDataSource() method and put getDatasourceAddress() (You can change the datasource properties from the properties file)
 
 **2.** Build jar file with Maven tool (exclude tests)
 mvn -Dmaven.test.skip=true clean install
