@@ -10,10 +10,12 @@ import gr.nikolis.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -47,12 +49,18 @@ public class AnimalService implements IService<Animal> {
         }
     }
 
+    @Override
+    public String deleteById(Long id) {
+        return deleteById(animalRepository, id);
+    }
+
     /**
      * Learn to an animal a new trick
      *
      * @param animalId The animal ID
      * @return The animal object
      */
+    @Async
     public String learnTrick(Long animalId) {
         Animal animal = findById(animalId);
         Specie specie = specieRepository.findBySpecieType(animal.getSpecie());
@@ -64,19 +72,16 @@ public class AnimalService implements IService<Animal> {
             animal.getTricksSet().add(trickToLearn);
             saveOrUpdate(animal);
         }
-        return trickToLearn != null ? trickToLearn.getTrick() : "";
-    }
-
-    @Override
-    public String deleteById(Long id) {
-        return deleteById(animalRepository, id);
+        String name = trickToLearn != null ? trickToLearn.getTrick() : "";
+        return "{ \"learnedTrick\": \"" + name + "\"}";
     }
 
     /**
      * Fill the String list of species object
      * in order to show on json view
      */
-    public void fillSpeciesList() {
+    @Async
+    public List<Animal> fillSpeciesList() {
         List<Animal> animalList = new ArrayList<>(findAll());
         for (Animal animal : animalList) {
             Set<Trick> trk = animal.getTricksSet();
@@ -87,11 +92,31 @@ public class AnimalService implements IService<Animal> {
             });
             animal.setTricks(trkName);
         }
+        return new ArrayList<>(findAll());
     }
 
+    /**
+     * Do a random trick
+     *
+     * @param id The animal id
+     * @return The trick
+     */
+    @Async
     public String animalRandomTrick(Long id) {
         Animal animal = findById(id);
         Set<Trick> tricks = animal.getTricksSet();
-        return utils.random(tricks).getTrick();
+        return "{ \"trick\": \"" + utils.random(tricks).getTrick() + "\"}";
+    }
+
+    /**
+     * Grouping the animals
+     *
+     * @return The list of string of grouped animals
+     */
+    @Async
+    public List<String> groupAnimals() {
+        List<Animal> animalList = new ArrayList<>(findAll());
+        Map<String, List<Animal>> animalListGrouped = animalList.stream().collect(Collectors.groupingBy(Animal::getSpecie));
+        return new ArrayList<>(animalListGrouped.keySet());
     }
 }

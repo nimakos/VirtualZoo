@@ -4,6 +4,7 @@ import gr.nikolis.sql.enums.TrickEnum;
 import gr.nikolis.sql.models.Animal;
 import gr.nikolis.sql.models.Trick;
 import gr.nikolis.sql.services.IService;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -12,6 +13,7 @@ import java.util.Set;
 @Component
 public class AnimalSeeder implements ISeeder<Animal>{
     @Override
+    @Async
     public void seed(IService<Animal> iService) {
         if (iService.findAll().isEmpty()) {
             Set<Trick> oscarTricks = new HashSet<>();

@@ -5,6 +5,7 @@ import gr.nikolis.sql.enums.TrickEnum;
 import gr.nikolis.sql.models.Specie;
 import gr.nikolis.sql.models.Trick;
 import gr.nikolis.sql.services.IService;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Component
 public class SpecieSeeder implements ISeeder<Specie> {
     @Override
+    @Async
     public void seed(IService<Specie> iService) {
         if (iService.findAll().isEmpty()) {
             Set<Trick> dogTricks = new HashSet<>();

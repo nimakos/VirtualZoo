@@ -3,11 +3,13 @@ package gr.nikolis.sql.seeders;
 import gr.nikolis.sql.enums.TrickEnum;
 import gr.nikolis.sql.models.Trick;
 import gr.nikolis.sql.services.IService;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TrickSeeder implements ISeeder<Trick>{
     @Override
+    @Async
     public void seed(IService<Trick> iService) {
         if (iService.findAll().isEmpty()) {
             iService.saveOrUpdate(new Trick(TrickEnum.walksOnLaptop.getCode(), TrickEnum.walksOnLaptop.getName()));
