@@ -8,7 +8,7 @@ Tools : Spring boot, Lombok, Sl4j, POSTGRESQL
 
 Build Tool : Maven
 
-Container : Docker hub
+Container : Docker
 
 Web Service Application
 
