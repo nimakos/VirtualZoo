@@ -1,11 +1,10 @@
 package gr.nikolis.sql.services;
 
-import gr.nikolis.sql.models.Animal;
-import gr.nikolis.sql.models.Specie;
-import gr.nikolis.sql.models.Trick;
+import gr.nikolis.sql.entities.Animal;
+import gr.nikolis.sql.entities.Specie;
+import gr.nikolis.sql.entities.Trick;
 import gr.nikolis.sql.repositories.AnimalRepository;
 import gr.nikolis.sql.repositories.SpecieRepository;
-import gr.nikolis.sql.repositories.TrickRepository;
 import gr.nikolis.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +22,6 @@ public class AnimalService implements IService<Animal> {
 
     @Autowired
     private AnimalRepository animalRepository;
-    @Autowired
-    private TrickRepository trickRepository;
     @Autowired
     private SpecieRepository specieRepository;
     @Autowired

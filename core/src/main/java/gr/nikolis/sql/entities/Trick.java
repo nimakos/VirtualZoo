@@ -1,4 +1,4 @@
-package gr.nikolis.sql.models;
+package gr.nikolis.sql.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

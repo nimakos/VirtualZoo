@@ -1,6 +1,6 @@
 package gr.nikolis.sql.services;
 
-import gr.nikolis.sql.models.Trick;
+import gr.nikolis.sql.entities.Trick;
 import gr.nikolis.sql.repositories.TrickRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package gr.nikolis.sql.services;
 
-import gr.nikolis.sql.models.Specie;
+import gr.nikolis.sql.entities.Specie;
 import gr.nikolis.sql.repositories.SpecieRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package gr.nikolis.controller;
 
 import gr.nikolis.mappings.AnimalMappings;
-import gr.nikolis.sql.models.Animal;
+import gr.nikolis.sql.entities.Animal;
 import gr.nikolis.sql.services.AnimalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

@@ -1,8 +1,8 @@
 package gr.nikolis.utils;
 
-import gr.nikolis.sql.models.Animal;
-import gr.nikolis.sql.models.Specie;
-import gr.nikolis.sql.models.Trick;
+import gr.nikolis.sql.entities.Animal;
+import gr.nikolis.sql.entities.Specie;
+import gr.nikolis.sql.entities.Trick;
 import gr.nikolis.sql.seeders.ISeeder;
 import gr.nikolis.sql.services.IService;
 import org.springframework.beans.factory.annotation.Autowired;

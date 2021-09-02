@@ -86,8 +86,7 @@ public class DataSourceConfig {
                         "serverTimezone=UTC&" +
                         "useUnicode=true&" +
                         "characterEncoding=utf8&" +
-                        "allowPublicKeyRetrieval=true&" +
-                        "useSSL=false")
+                        "allowPublicKeyRetrieval=true")
                 .username(getDatasourceUserName())
                 .password(getDataSourcePassword())
                 .build();

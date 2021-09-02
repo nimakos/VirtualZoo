@@ -1,6 +1,6 @@
 package gr.nikolis.sql.repositories;
 
-import gr.nikolis.sql.models.Trick;
+import gr.nikolis.sql.entities.Trick;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

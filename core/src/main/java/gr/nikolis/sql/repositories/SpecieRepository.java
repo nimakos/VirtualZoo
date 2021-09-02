@@ -1,6 +1,6 @@
 package gr.nikolis.sql.repositories;
 
-import gr.nikolis.sql.models.Specie;
+import gr.nikolis.sql.entities.Specie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

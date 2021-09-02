@@ -22,7 +22,7 @@ mvn -Dmaven.test.skip=true clean install
 java -jar ./web/target/virtualZoo.jar
 
 **4.** Run Application
-Open a web browser and type http://localhost:8888/myZoo/animals/all (You can change the ip address and the port from the properties file)
+Open a web browser and type https://localhost:8888/myZoo/animals/all (You can change the ip address and the port from the properties file)
 
 
 # Docker -Build and run a container with Sql Server and application Images (with running docker-compose.yml script)
@@ -35,7 +35,7 @@ mvn -Dmaven.test.skip=true clean install
 docker-compose up
 
 **4.** Run Application
-Open a web browser and type http://localhost:8888/myZoo/animals/all (You can change the ip address and the port from the .yml file)
+Open a web browser and type https://localhost:8888/myZoo/animals/all (You can change the ip address and the port from the .yml file)
 
 
 # Docker -Build and run a container with application Image but with no Sql Server (running all localhost)

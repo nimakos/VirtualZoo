@@ -1,8 +1,8 @@
 package gr.nikolis.sql.seeders;
 
 import gr.nikolis.sql.enums.TrickEnum;
-import gr.nikolis.sql.models.Animal;
-import gr.nikolis.sql.models.Trick;
+import gr.nikolis.sql.entities.Animal;
+import gr.nikolis.sql.entities.Trick;
 import gr.nikolis.sql.services.IService;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
