@@ -4,11 +4,11 @@ IDE: IntelliJ
 
 Language: Java 11
 
-Tools : Spring boot, Lombok, Sl4j, POSTGRESQL
+Tools: Spring boot, Lombok, Sl4j, POSTGRESQL
 
-Build Tool : Maven
+Build Tool: Maven
 
-Container : Docker
+Container: Docker
 
 Web Service Application
 
