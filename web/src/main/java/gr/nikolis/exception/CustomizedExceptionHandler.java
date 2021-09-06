@@ -1,8 +1,8 @@
 package gr.nikolis.exception;
 
-import gr.nikolis.sql.exception.AnimalNotFoundException;
-import gr.nikolis.sql.exception.ConflictException;
-import gr.nikolis.sql.exception.ExceptionResponse;
+import gr.nikolis.sql.exceptions.AnimalNotFoundException;
+import gr.nikolis.sql.exceptions.ConflictException;
+import gr.nikolis.sql.exceptions.ExceptionResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

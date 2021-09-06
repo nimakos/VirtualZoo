@@ -3,8 +3,8 @@ package gr.nikolis.sql.services;
 import gr.nikolis.sql.entities.Animal;
 import gr.nikolis.sql.entities.Specie;
 import gr.nikolis.sql.entities.Trick;
-import gr.nikolis.sql.exception.AnimalNotFoundException;
-import gr.nikolis.sql.exception.ConflictException;
+import gr.nikolis.sql.exceptions.AnimalNotFoundException;
+import gr.nikolis.sql.exceptions.ConflictException;
 import gr.nikolis.sql.repositories.AnimalRepository;
 import gr.nikolis.sql.repositories.SpecieRepository;
 import gr.nikolis.utils.Utils;
@@ -102,7 +102,7 @@ public class AnimalService implements IService<Animal> {
     public String animalRandomTrick(Long id) {
         Animal animal = findById(id);
         if (animal == null)
-            throw new AnimalNotFoundException("id-" + id);
+            throw new AnimalNotFoundException("id=" + id);
         Set<Trick> tricks = animal.getTricksSet();
         return "{ \"trick\": \"" + utils.random(tricks).getTrick() + "\"}";
     }
