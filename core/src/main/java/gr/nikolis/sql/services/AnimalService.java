@@ -3,15 +3,15 @@ package gr.nikolis.sql.services;
 import gr.nikolis.sql.entities.Animal;
 import gr.nikolis.sql.entities.Specie;
 import gr.nikolis.sql.entities.Trick;
+import gr.nikolis.sql.exception.AnimalNotFoundException;
+import gr.nikolis.sql.exception.ConflictException;
 import gr.nikolis.sql.repositories.AnimalRepository;
 import gr.nikolis.sql.repositories.SpecieRepository;
 import gr.nikolis.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -42,7 +42,7 @@ public class AnimalService implements IService<Animal> {
         try {
             return animalRepository.saveAndFlush(animal);
         } catch (Exception ex) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Conflict on SQL Statement while trying to save object!!");
+            throw new ConflictException("Conflict on SQL Statement while trying to save object!!");
         }
     }
 
@@ -101,6 +101,8 @@ public class AnimalService implements IService<Animal> {
     @Async
     public String animalRandomTrick(Long id) {
         Animal animal = findById(id);
+        if (animal == null)
+            throw new AnimalNotFoundException("id-" + id);
         Set<Trick> tricks = animal.getTricksSet();
         return "{ \"trick\": \"" + utils.random(tricks).getTrick() + "\"}";
     }
