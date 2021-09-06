@@ -52,7 +52,7 @@ public interface IService<T> {
         JSONObject jsonObject = new JSONObject();
         try {
             repository.deleteById(id);
-            jsonObject.put("message", "User deleted successfully");
+            jsonObject.put("message", "Object deleted successfully");
         } catch (Exception e) {
             try {
                 jsonObject.put("message", e.getMessage());
