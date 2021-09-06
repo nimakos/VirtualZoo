@@ -3,8 +3,10 @@ package gr.nikolis.exception;
 import gr.nikolis.sql.exceptions.AnimalNotFoundException;
 import gr.nikolis.sql.exceptions.ConflictException;
 import gr.nikolis.sql.exceptions.ExceptionResponse;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,5 +35,20 @@ public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
     public final ResponseEntity<Object> handleConflictExceptions(Exception ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(exceptionResponse, HttpStatus.CONFLICT);
+    }
+
+    /**
+     * For validations
+     *
+     * @param ex      – the exception
+     * @param headers the headers to be written to the response
+     * @param status  the selected response status
+     * @param request the current request
+     * @return a ResponseEntity instance
+     */
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), ex.getBindingResult().toString());
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 }
