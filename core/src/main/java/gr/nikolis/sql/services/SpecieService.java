@@ -1,7 +1,9 @@
 package gr.nikolis.sql.services;
 
 import gr.nikolis.sql.entities.Specie;
+import gr.nikolis.sql.exceptions.ConflictException;
 import gr.nikolis.sql.repositories.SpecieRepository;
+import gr.nikolis.utils.MessageBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,12 +29,12 @@ public class SpecieService implements IService<Specie> {
         try {
             return specieRepository.saveAndFlush(specie);
         } catch (Exception ex) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Conflict on SQL Statement while trying to save object!!");
+            throw new ConflictException("Conflict on SQL Statement while trying to save object!!");
         }
     }
 
     @Override
-    public String deleteById(Long id) {
+    public MessageBean deleteById(Long id) {
         return deleteById(specieRepository, id);
     }
 }

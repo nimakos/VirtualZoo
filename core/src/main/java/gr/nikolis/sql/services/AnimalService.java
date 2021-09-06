@@ -7,6 +7,7 @@ import gr.nikolis.sql.exceptions.AnimalNotFoundException;
 import gr.nikolis.sql.exceptions.ConflictException;
 import gr.nikolis.sql.repositories.AnimalRepository;
 import gr.nikolis.sql.repositories.SpecieRepository;
+import gr.nikolis.utils.MessageBean;
 import gr.nikolis.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class AnimalService implements IService<Animal> {
     }
 
     @Override
-    public String deleteById(Long id) {
+    public MessageBean deleteById(Long id) {
         return deleteById(animalRepository, id);
     }
 

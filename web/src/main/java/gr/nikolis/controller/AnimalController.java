@@ -3,6 +3,7 @@ package gr.nikolis.controller;
 import gr.nikolis.mappings.AnimalMappings;
 import gr.nikolis.sql.entities.Animal;
 import gr.nikolis.sql.services.AnimalService;
+import gr.nikolis.utils.MessageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,8 +34,13 @@ public class AnimalController {
         return animalService.animalRandomTrick(animalId);
     }
 
-    @RequestMapping(value = "/{animalId}/learnTrick", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{animalId}/learnTrick", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public String learnTrick(@PathVariable(value = "animalId") long animalId) {
         return animalService.learnTrick(animalId);
+    }
+
+    @RequestMapping(value = "/{animalId}/deleteAnimal", method = RequestMethod.DELETE)
+    public MessageBean deleteAnimal(@PathVariable(value = "animalId") long animalId) {
+        return animalService.deleteById(animalId);
     }
 }

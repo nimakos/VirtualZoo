@@ -1,7 +1,7 @@
 package gr.nikolis.sql.services;
 
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
+import gr.nikolis.sql.exceptions.ConflictException;
+import gr.nikolis.utils.MessageBean;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +30,7 @@ public interface IService<T> {
      * @return The saved object
      */
     @Transactional
-    T saveOrUpdate(T t);
+    T saveOrUpdate(T t) throws ConflictException;
 
     /**
      * Delete an object by its id
@@ -38,28 +38,22 @@ public interface IService<T> {
      * @param id The object id
      * @return A JSon object message if object was deleted successfully or not
      */
-    String deleteById(Long id);
+    MessageBean deleteById(Long id);
 
     /**
-     * Overload method for deleting an object
+     * Overload generic method for deleting an object
      *
      * @param repository The repository that the object belongs to
      * @param id         The element id
      * @return JSon object message if object was deleted successfully or not
      */
     @Transactional
-    default <M, ID> String deleteById(JpaRepository<M, ID> repository, ID id) {
-        JSONObject jsonObject = new JSONObject();
+    default <M, ID> MessageBean deleteById(JpaRepository<M, ID> repository, ID id) {
         try {
             repository.deleteById(id);
-            jsonObject.put("message", "Object deleted successfully");
-        } catch (Exception e) {
-            try {
-                jsonObject.put("message", e.getMessage());
-            } catch (JSONException jsonException) {
-                jsonException.printStackTrace();
-            }
+            return new MessageBean("Object deleted successfully");
+        } catch (Exception ex) {
+            return new MessageBean("Object not deleted");
         }
-        return jsonObject.toString();
     }
 }
