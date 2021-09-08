@@ -39,7 +39,7 @@ Open a web browser and type https://localhost:8888/myZoo/animals/all (You can ch
 
 
 # Docker -Build and run a container with application Image but with no Sql Server (running all localhost)
-**1.**  make primary mySqlDataSource() method and put getDatasourceAddress() (You can change the datasource properties from the properties file)
+**1.**  Select getDatasourceAddress() (You can change the datasource properties from the properties file)
 
 **2.** Build jar file with Maven tool (exclude tests)
 mvn -Dmaven.test.skip=true clean install

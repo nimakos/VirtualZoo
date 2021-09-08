@@ -78,8 +78,8 @@ public class DataSourceConfig {
      *
      * @return The DataSource object
      */
-    @Bean(name = "mySqlDataSource")
-    public DataSource mySqlDataSource() {
+    @Bean(name = "sqlDataSource")
+    public DataSource sqlDataSource() {
         return DataSourceBuilder.create()
                 .url("jdbc:" + getDatasourceApplicationName() + "://" + getDatasourceAddress() + "/" + getDatasourceDBName() + "?" +
                         "createDatabaseIfNotExist=true&" +
