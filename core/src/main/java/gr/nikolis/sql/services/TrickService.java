@@ -9,15 +9,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @Slf4j
 public class TrickService implements IService<Trick> {
-    @Autowired private TrickRepository trickRepository;
+    @Autowired
+    private TrickRepository trickRepository;
 
     @Override
     public Collection<Trick> findAll() {
         return trickRepository.findAll();
+    }
+
+    @Override
+    public List<Trick> findByName(String name) {
+        return null;
     }
 
     @Override

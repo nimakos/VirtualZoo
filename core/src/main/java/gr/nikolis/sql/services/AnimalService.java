@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @Slf4j
@@ -31,6 +32,19 @@ public class AnimalService implements IService<Animal> {
     @Override
     public Collection<Animal> findAll() {
         return animalRepository.findAll();
+    }
+
+    public List<Animal> findAllByStream() {
+        try (Stream<Animal> animalStream = animalRepository.findAllByStream()) {
+            return animalStream.parallel().collect(Collectors.toList());
+        }
+    }
+
+    @Override
+    public List<Animal> findByName(String name) {
+        try (Stream<Animal> animalStream = animalRepository.findByName(name)) {
+            return animalStream.parallel().collect(Collectors.toList());
+        }
     }
 
     @Override
@@ -61,16 +75,19 @@ public class AnimalService implements IService<Animal> {
     @Async
     public String learnTrick(Long animalId) {
         Animal animal = findById(animalId);
-        Specie specie = specieRepository.findBySpecieType(animal.getSpecie());
-        Set<Trick> tricksLearned = new HashSet<>(animal.getTricksSet());
-        Set<Trick> tricksToLearn = new HashSet<>(specie.getTricksSet());
-        tricksToLearn.removeAll(tricksLearned);
-        Trick trickToLearn = utils.random(tricksToLearn);
-        if (trickToLearn != null) {
-            animal.getTricksSet().add(trickToLearn);
-            saveOrUpdate(animal);
+        String name = "";
+        if (animal != null) {
+            Specie specie = specieRepository.findBySpecieType(animal.getSpecie());
+            Set<Trick> tricksLearned = new HashSet<>(animal.getTricksSet());
+            Set<Trick> tricksToLearn = new HashSet<>(specie.getTricksSet());
+            tricksToLearn.removeAll(tricksLearned);
+            Trick trickToLearn = utils.random(tricksToLearn);
+            if (trickToLearn != null) {
+                animal.getTricksSet().add(trickToLearn);
+                saveOrUpdate(animal);
+                name = trickToLearn.getTrick();
+            }
         }
-        String name = trickToLearn != null ? trickToLearn.getTrick() : "";
         return "{ \"learnedTrick\": \"" + name + "\"}";
     }
 
@@ -80,7 +97,7 @@ public class AnimalService implements IService<Animal> {
      */
     @Async
     public List<Animal> fillSpeciesList() {
-        List<Animal> animalList = new ArrayList<>(findAll());
+        List<Animal> animalList = new ArrayList<>(findAllByStream());
         for (Animal animal : animalList) {
             Set<Trick> trk = animal.getTricksSet();
             List<String> trkName = new ArrayList<>();

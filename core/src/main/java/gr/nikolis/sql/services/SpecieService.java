@@ -9,16 +9,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @Slf4j
 public class SpecieService implements IService<Specie> {
 
-    @Autowired private SpecieRepository specieRepository;
-    @Override public Collection<Specie> findAll() {
+    @Autowired
+    private SpecieRepository specieRepository;
+
+    @Override
+    public Collection<Specie> findAll() {
         return specieRepository.findAll();
     }
-    @Override public Specie findById(Long id) {
+
+    @Override
+    public List<Specie> findByName(String name) {
+        return null;
+    }
+
+    @Override
+    public Specie findById(Long id) {
         return specieRepository.findById(id).orElse(null);
     }
 

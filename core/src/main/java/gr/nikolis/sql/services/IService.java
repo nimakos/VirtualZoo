@@ -3,10 +3,14 @@ package gr.nikolis.sql.services;
 import gr.nikolis.sql.exceptions.ConflictException;
 import gr.nikolis.utils.MessageBean;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Stream;
 
+@Service
 public interface IService<T> {
     /**
      * Find all collection of elements
@@ -14,6 +18,8 @@ public interface IService<T> {
      * @return The collection
      */
     Collection<T> findAll();
+
+    List<T> findByName(String name);
 
     /**
      * Find a specific object by id

@@ -6,6 +6,7 @@ import gr.nikolis.sql.services.AnimalService;
 import gr.nikolis.utils.MessageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +21,7 @@ public class AnimalController {
     private AnimalService animalService;
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Transactional
     public List<Animal> getAnimals() {
         return animalService.fillSpeciesList();
     }

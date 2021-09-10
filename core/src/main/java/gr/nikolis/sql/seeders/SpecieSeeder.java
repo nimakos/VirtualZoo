@@ -7,6 +7,7 @@ import gr.nikolis.sql.entities.Trick;
 import gr.nikolis.sql.services.IService;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
