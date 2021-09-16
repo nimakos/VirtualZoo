@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping(AnimalMappings.ANIMALS)
@@ -21,8 +23,23 @@ public class AnimalController {
     private AnimalService animalService;
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Animal> getAnimals() {
+/*
+        var f1 = CompletableFuture.supplyAsync(() -> learnTrick(2L));
+        //var f2 = CompletableFuture.supplyAsync(() -> animalService.fillSpeciesList());
+        var f3 = CompletableFuture.supplyAsync(() -> animalService.groupAnimals());
+
+        CompletableFuture<Void> all1 = CompletableFuture.allOf(f1, f3);
+        try {
+            all1.thenRun(() -> {
+
+            });
+            System.out.println();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+
         return animalService.fillSpeciesList();
     }
 

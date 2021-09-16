@@ -10,11 +10,15 @@ import gr.nikolis.sql.repositories.SpecieRepository;
 import gr.nikolis.utils.MessageBean;
 import gr.nikolis.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -64,6 +68,29 @@ public class AnimalService implements IService<Animal> {
     @Override
     public MessageBean deleteById(Long id) {
         return deleteById(animalRepository, id);
+    }
+
+    @Transactional(readOnly = true)
+    public String testing() {
+        /*var f1 = CompletableFuture.supplyAsync(() -> learnTrick(2L));
+        var f2 = CompletableFuture.supplyAsync(this::fillSpeciesList);
+
+        CompletableFuture<Void> all1 = CompletableFuture.allOf(f1, f2);
+        try {
+            var result = all1.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        CompletableFuture<Void> all = CompletableFuture.allOf(
+                Collections
+                        .nCopies(2, f1)
+                        .stream()
+                        .map(f -> f.thenAcceptAsync(foo -> fillSpeciesList()))
+                        .toArray(CompletableFuture<?>[]::new));*/
+        return "";
     }
 
     /**
