@@ -4,6 +4,7 @@ import gr.nikolis.mappings.AnimalMappings;
 import gr.nikolis.sql.entities.Animal;
 import gr.nikolis.sql.services.AnimalService;
 import gr.nikolis.utils.MessageBean;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,8 +26,8 @@ public class AnimalController {
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @Transactional(readOnly = true)
     public List<Animal> getAnimals() {
-/*
-        var f1 = CompletableFuture.supplyAsync(() -> learnTrick(2L));
+
+/*        var f1 = CompletableFuture.supplyAsync(() -> learnTrick(2L));
         //var f2 = CompletableFuture.supplyAsync(() -> animalService.fillSpeciesList());
         var f3 = CompletableFuture.supplyAsync(() -> animalService.groupAnimals());
 
