@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping(AnimalMappings.ANIMALS)
@@ -27,34 +25,7 @@ public class AnimalController {
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @Transactional(readOnly = true)
     public List<Animal> getAnimals() {
-        var f1 = CompletableFuture.supplyAsync(() -> animalService.learnTrick(2L));
-        var f2 = CompletableFuture.supplyAsync(() -> animalService.fillSpeciesList());
-        var f3 = CompletableFuture.supplyAsync(() -> animalService.groupAnimals());
-        var f4 = CompletableFuture.supplyAsync(() -> animalService.asyncMethod());
-
-        CompletableFuture<Void> all1 = CompletableFuture.allOf(f1,f2, f3);
-        try {
-            //all1.join();
-            all1.thenRun(() -> {
-                try {
-                    var fdsf = f1.get();
-                    var sad = f2.get();
-                    var fsadfa = f3.get();
-                    var sadsad = f4.get();
-                    log.info(fdsf);
-                    sad.forEach(animal -> {log.info(animal.getName());});
-                    log.info(fsadfa.toString());
-                    log.info(sadsad);
-                } catch (InterruptedException | ExecutionException e) {
-                    e.printStackTrace();
-                }
-
-                log.info("All OK");
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        animalService.findAllByStream();
         return animalService.fillSpeciesList();
     }
 

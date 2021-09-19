@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -34,7 +35,7 @@ public class AnimalService implements IService<Animal> {
         return animalRepository.findAll();
     }
 
-    private List<Animal> findAllByStream() {
+    public List<Animal> findAllByStream() {
         try (Stream<Animal> animalStream = animalRepository.findAllByStream()) {
             return animalStream.parallel().collect(Collectors.toList());
         }
@@ -136,16 +137,4 @@ public class AnimalService implements IService<Animal> {
         Map<String, List<Animal>> animalListGrouped = animalList.stream().collect(Collectors.groupingBy(Animal::getSpecie));
         return new ArrayList<>(animalListGrouped.keySet());
     }
-
-    @Async
-    public String asyncMethod() {
-        try {
-            Thread.sleep(10000);
-            return "Hallo";
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-       return "Vagos";
-    }
-    
 }
