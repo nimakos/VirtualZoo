@@ -1,6 +1,5 @@
 package gr.nikolis.async;
 
-import gr.nikolis.sql.entities.Animal;
 import gr.nikolis.sql.services.AnimalService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -20,9 +18,8 @@ public class AsyncMethods {
 
     @PostConstruct
     public void init() {
-        //method1();
+        method1();
         //List<Animal> animals= animalService.findAllByStream();
-        System.out.println();
     }
 
     public void method1() {
@@ -33,7 +30,10 @@ public class AsyncMethods {
 
         CompletableFuture<Void> all1 = CompletableFuture.allOf(f1, f2, f3);
         try {
+            //Freezes all until jobs complete
             //all1.join();
+
+            //continue other tasks and when this completes then is running async
             all1.thenRun(() -> {
                 try {
                     var fdsf = f1.get();

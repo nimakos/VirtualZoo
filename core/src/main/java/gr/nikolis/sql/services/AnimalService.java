@@ -35,6 +35,7 @@ public class AnimalService implements IService<Animal> {
         return animalRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public List<Animal> findAllByStream() {
         try (Stream<Animal> animalStream = animalRepository.findAllByStream()) {
             return animalStream.parallel().collect(Collectors.toList());
