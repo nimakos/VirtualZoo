@@ -2,6 +2,7 @@ package gr.nikolis.sql.services;
 
 import gr.nikolis.sql.exceptions.ConflictException;
 import gr.nikolis.utils.MessageBean;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

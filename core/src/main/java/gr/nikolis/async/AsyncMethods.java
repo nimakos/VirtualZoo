@@ -18,7 +18,7 @@ public class AsyncMethods {
 
     @PostConstruct
     public void init() {
-        method1();
+        //method1();
         //List<Animal> animals= animalService.findAllByStream();
     }
 
