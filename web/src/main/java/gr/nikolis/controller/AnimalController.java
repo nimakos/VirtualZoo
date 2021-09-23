@@ -32,7 +32,6 @@ public class AnimalController {
     @RequestMapping(value = "/{id}/getAnimal", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @Cacheable(value = "Animal", key = "#id")
     public Animal getAnimal(@PathVariable(value = "id") long id) {
-        log.info("HELOOOOOOOOOOOOOOOOOOOOOOOOOOO");
         return animalService.findById(id);
     }
 
