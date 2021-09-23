@@ -24,13 +24,13 @@ public class AnimalController {
     private AnimalService animalService;
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true) // this works only here
     public List<Animal> getAnimals() {
         return animalService.fillSpeciesList();
     }
 
     @RequestMapping(value = "/{id}/getAnimal", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @Cacheable(value = "Animal", key = "#id")
+    @Cacheable(value = "Animal", key = "#id") // this works only here
     public Animal getAnimal(@PathVariable(value = "id") long id) {
         return animalService.findById(id);
     }
