@@ -49,3 +49,16 @@ docker build . -t spring-boot-mvc-image-without-sql
 
 **4.** Create and Run the Application container with application Image
 docker run -p 8888:8888 --name spring-boot-mvc-container-without-sql -d spring-boot-mvc-image-without-sql
+
+# Useful commands
+**1.** First making some project changes
+**2.** Build project with maven (mvn -Dmaven.test.skip=true clean install)
+**3.** Build docker service (docker-compose build web) (web:the service reference)
+**4.** Re run docker service (docker-compose up --no-deps -d web)  
+
+# Use environmental variables 
+**1.** create .env file on root project 
+**2.** On .yml add ${APP_PORT}
+**3.** On terminal put : APP_PORT=8888 docker-compose down, export APP_PORT=8888
+**4.** write on .env : APP_PORT=8888
+**4.** Run docker : docker-compose up -d

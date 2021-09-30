@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.5'
 services:
   db:
     image: 'postgres'
@@ -24,10 +24,11 @@ services:
     build: ./
     image: "virtualzoo-image"
     # Just link the database with the web application
+    restart: 'always'
     links:
       - db:postgres
     ports:
-      - '8888:8888'
+      - '${APP_PORT}:8888'
     environment:
       - WAIT_HOSTS=localhost:5432
       - WAIT_HOSTS_TIMEOUT=300

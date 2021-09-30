@@ -1,10 +1,12 @@
 package gr.nikolis.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 
 import javax.sql.DataSource;
 
@@ -21,9 +23,12 @@ public class DataSourceConfig {
     @Value("${spring.datasource.address1:localhost}")
     private String datasourceAddress;
     @Value("${spring.datasource.address2:sql-container-yml}")
-    private String datasourceAddress3;
+    private String datasourceAddress2;
     @Value("${spring.datasource.dbname:postgres}")
     private String datasourceDBName;
+
+    @Autowired
+    private Environment env;
 
     @Bean
     public String getDatasourceApplicationName() {
@@ -64,7 +69,7 @@ public class DataSourceConfig {
      */
     @Bean
     public String getDatasourceAddress2() {
-        return datasourceAddress3;
+        return datasourceAddress2;
     }
 
     @Bean
@@ -80,6 +85,7 @@ public class DataSourceConfig {
      */
     @Bean(name = "sqlDataSource")
     public DataSource sqlDataSource() {
+        String envDataSourceAddress = env.getProperty("DATASOURCE_DOCKER");
         return DataSourceBuilder.create()
                 .url("jdbc:" + getDatasourceApplicationName() + "://" + getDatasourceAddress() + "/" + getDatasourceDBName() + "?" +
                         "createDatabaseIfNotExist=true&" +

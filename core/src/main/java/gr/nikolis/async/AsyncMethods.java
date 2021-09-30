@@ -1,5 +1,6 @@
 package gr.nikolis.async;
 
+import gr.nikolis.config.ThreadConfig;
 import gr.nikolis.sql.services.AnimalService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,43 +19,41 @@ public class AsyncMethods {
 
     @PostConstruct
     public void init() {
-        //method1();
+        method1();
         //List<Animal> animals= animalService.findAllByStream();
     }
 
-    public void method1() {
+    @Async(ThreadConfig.EXECUTOR)
+    public CompletableFuture<Void> method1() {
         var f1 = CompletableFuture.supplyAsync(() -> animalService.learnTrick(2L));
         var f2 = CompletableFuture.supplyAsync(() -> animalService.fillSpeciesList());
         var f3 = CompletableFuture.supplyAsync(() -> animalService.groupAnimals());
         var f4 = CompletableFuture.supplyAsync(this::asyncMethod);
 
         CompletableFuture<Void> all1 = CompletableFuture.allOf(f1, f2, f3);
-        try {
-            //Freezes all until jobs complete
-            //all1.join();
 
-            //continue other tasks and when this completes then is running async
-            all1.thenRun(() -> {
-                try {
-                    var fdsf = f1.get();
-                    var sad = f2.get();
-                    var fsadfa = f3.get();
-                    var sadsad = f4.get();
-                    log.info(fdsf);
-                    sad.forEach(animal -> {
-                        log.info(animal.getName());
-                    });
-                    log.info(fsadfa.toString());
-                    log.info(sadsad);
-                } catch (InterruptedException | ExecutionException e) {
-                    e.printStackTrace();
-                }
+        //Freezes all until jobs complete
+        //all1.join();
 
-                log.info("All OK");
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        //continue other tasks and when this completes then is running async
+        return all1.thenRun(() -> {
+            try {
+                var fdsf = f1.get();
+                var sad = f2.get();
+                var fsadfa = f3.get();
+                var sadsad = f4.get();
+                log.info(fdsf);
+                sad.forEach(animal -> {
+                    log.info(animal.getName());
+                });
+                log.info(fsadfa.toString());
+                log.info(sadsad);
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+
+            log.info("All OK");
+        });
     }
 
     public void method2() {
@@ -80,7 +79,7 @@ public class AsyncMethods {
     @Async
     public String asyncMethod() {
         try {
-            Thread.sleep(10000);
+            Thread.sleep(1000);
             return "Hallo";
         } catch (InterruptedException e) {
             e.printStackTrace();
