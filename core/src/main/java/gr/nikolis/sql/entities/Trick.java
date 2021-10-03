@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "trick")
@@ -25,4 +26,17 @@ public class Trick implements Serializable {
 
     @Column(name = "trick_name")
     private String trick;
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Trick trick = (Trick) obj;
+        return Objects.equals(getId(), trick.getId());
+    }
 }

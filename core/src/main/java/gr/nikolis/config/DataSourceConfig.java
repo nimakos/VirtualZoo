@@ -1,17 +1,25 @@
 package gr.nikolis.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
 
 import javax.sql.DataSource;
 
 @Configuration
-@PropertySource("classpath:datasource.properties")
+@PropertySources({
+        @PropertySource("classpath:datasource.properties"),
+        //@PropertySource("classpath:env")
+})
+
+//@PropertySource("classpath:datasource.properties")
+@Slf4j
 public class DataSourceConfig {
 
     @Value("${spring.datasource.applicationName:postgresql}")
@@ -86,6 +94,7 @@ public class DataSourceConfig {
     @Bean(name = "sqlDataSource")
     public DataSource sqlDataSource() {
         String envDataSourceAddress = env.getProperty("DATASOURCE_DOCKER");
+        String envDataSourceAddress2 = System.getenv("DATASOURCE_DOCKER");
         return DataSourceBuilder.create()
                 .url("jdbc:" + getDatasourceApplicationName() + "://" + getDatasourceAddress() + "/" + getDatasourceDBName() + "?" +
                         "createDatabaseIfNotExist=true&" +

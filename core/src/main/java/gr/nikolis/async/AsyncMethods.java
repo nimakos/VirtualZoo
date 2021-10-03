@@ -19,8 +19,10 @@ public class AsyncMethods {
 
     @PostConstruct
     public void init() {
-        method1();
+        //method1();
         //List<Animal> animals= animalService.findAllByStream();
+        animalService.learnTrick(2L);
+
     }
 
     @Async(ThreadConfig.EXECUTOR)
