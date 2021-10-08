@@ -26,6 +26,8 @@ public class AnimalController {
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @Transactional(readOnly = true) // this works only here
     public List<Animal> getAnimals() {
+        int i = 4;
+        int j = i/0;
         return animalService.fillSpeciesList();
     }
 

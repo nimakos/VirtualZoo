@@ -1,15 +1,14 @@
-package gr.nikolis.exception;
+package gr.nikolis.handlers;
 
-import gr.nikolis.sql.exceptions.AnimalNotFoundException;
-import gr.nikolis.sql.exceptions.ConflictException;
-import gr.nikolis.sql.exceptions.ExceptionResponse;
+import gr.nikolis.sql.handlers.AnimalNotFoundException;
+import gr.nikolis.sql.handlers.ConflictException;
+import gr.nikolis.sql.handlers.model.ExceptionResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -17,7 +16,6 @@ import javax.annotation.Nonnull;
 import java.util.Date;
 
 @ControllerAdvice
-@RestController
 public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)

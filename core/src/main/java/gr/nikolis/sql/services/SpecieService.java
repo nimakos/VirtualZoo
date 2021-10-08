@@ -1,7 +1,7 @@
 package gr.nikolis.sql.services;
 
 import gr.nikolis.sql.entities.Specie;
-import gr.nikolis.sql.exceptions.ConflictException;
+import gr.nikolis.sql.handlers.ConflictException;
 import gr.nikolis.sql.repositories.SpecieRepository;
 import gr.nikolis.utils.MessageBean;
 import lombok.extern.slf4j.Slf4j;

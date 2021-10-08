@@ -1,4 +1,4 @@
-package gr.nikolis.sql.exceptions;
+package gr.nikolis.sql.handlers.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

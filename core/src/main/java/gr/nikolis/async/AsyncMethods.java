@@ -32,22 +32,20 @@ public class AsyncMethods {
         var f3 = CompletableFuture.supplyAsync(() -> animalService.groupAnimals());
         var f4 = CompletableFuture.supplyAsync(this::asyncMethod);
 
-        CompletableFuture<Void> all1 = CompletableFuture.allOf(f1, f2, f3);
+        CompletableFuture<Void> all = CompletableFuture.allOf(f1, f2, f3);
 
         //Freezes all until jobs complete
-        //all1.join();
+        //all.join();
 
         //continue other tasks and when this completes then is running async
-        return all1.thenRun(() -> {
+        return all.thenRun(() -> {
             try {
                 var fdsf = f1.get();
                 var sad = f2.get();
                 var fsadfa = f3.get();
                 var sadsad = f4.get();
                 log.info(fdsf);
-                sad.forEach(animal -> {
-                    log.info(animal.getName());
-                });
+                sad.forEach(animal -> log.info(animal.getName()));
                 log.info(fsadfa.toString());
                 log.info(sadsad);
             } catch (InterruptedException | ExecutionException e) {
@@ -71,9 +69,7 @@ public class AsyncMethods {
         var fourth = f4.join();
 
         log.info(first);
-        second.forEach(animal -> {
-            log.info(animal.getName());
-        });
+        second.forEach(animal -> log.info(animal.getName()));
         log.info(third.toString());
         log.info(fourth);
     }
