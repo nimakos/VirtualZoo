@@ -1,6 +1,5 @@
-package gr.nikolis.sql.entities;
+package gr.nikolis.sql.dao;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +19,6 @@ public class Trick implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     @Column(nullable = false)
     private Long id;
 

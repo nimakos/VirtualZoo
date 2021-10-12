@@ -1,4 +1,4 @@
-package gr.nikolis.sql.entities;
+package gr.nikolis.sql.dao;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

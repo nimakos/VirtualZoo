@@ -1,6 +1,5 @@
-package gr.nikolis.sql.entities;
+package gr.nikolis.sql.dao;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,7 +16,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@JsonIgnoreProperties({"tricksSet"})
+//@JsonIgnoreProperties({"tricksSet"})
 public class Animal implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

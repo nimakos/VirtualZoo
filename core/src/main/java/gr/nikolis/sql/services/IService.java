@@ -1,6 +1,6 @@
 package gr.nikolis.sql.services;
 
-import gr.nikolis.sql.handlers.ConflictException;
+import gr.nikolis.handlers.exception.ConflictException;
 import gr.nikolis.utils.MessageBean;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;

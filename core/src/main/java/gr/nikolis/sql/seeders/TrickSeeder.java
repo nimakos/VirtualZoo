@@ -1,11 +1,10 @@
 package gr.nikolis.sql.seeders;
 
 import gr.nikolis.sql.enums.TrickEnum;
-import gr.nikolis.sql.entities.Trick;
+import gr.nikolis.sql.dao.Trick;
 import gr.nikolis.sql.services.IService;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class TrickSeeder implements ISeeder<Trick>{

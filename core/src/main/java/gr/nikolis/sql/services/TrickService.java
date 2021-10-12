@@ -1,7 +1,7 @@
 package gr.nikolis.sql.services;
 
-import gr.nikolis.sql.entities.Trick;
-import gr.nikolis.sql.handlers.ConflictException;
+import gr.nikolis.sql.dao.Trick;
+import gr.nikolis.handlers.exception.ConflictException;
 import gr.nikolis.sql.repositories.TrickRepository;
 import gr.nikolis.utils.MessageBean;
 import lombok.extern.slf4j.Slf4j;

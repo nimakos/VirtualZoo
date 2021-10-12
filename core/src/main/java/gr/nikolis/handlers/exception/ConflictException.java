@@ -1,4 +1,4 @@
-package gr.nikolis.sql.handlers;
+package gr.nikolis.handlers.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

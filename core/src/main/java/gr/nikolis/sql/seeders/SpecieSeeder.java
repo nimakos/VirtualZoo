@@ -2,12 +2,11 @@ package gr.nikolis.sql.seeders;
 
 import gr.nikolis.sql.enums.SpecieEnum;
 import gr.nikolis.sql.enums.TrickEnum;
-import gr.nikolis.sql.entities.Specie;
-import gr.nikolis.sql.entities.Trick;
+import gr.nikolis.sql.dao.Specie;
+import gr.nikolis.sql.dao.Trick;
 import gr.nikolis.sql.services.IService;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;

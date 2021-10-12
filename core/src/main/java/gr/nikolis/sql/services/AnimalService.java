@@ -1,10 +1,10 @@
 package gr.nikolis.sql.services;
 
-import gr.nikolis.sql.entities.Animal;
-import gr.nikolis.sql.entities.Specie;
-import gr.nikolis.sql.entities.Trick;
-import gr.nikolis.sql.handlers.AnimalNotFoundException;
-import gr.nikolis.sql.handlers.ConflictException;
+import gr.nikolis.sql.dao.Animal;
+import gr.nikolis.sql.dao.Specie;
+import gr.nikolis.sql.dao.Trick;
+import gr.nikolis.handlers.exception.AnimalNotFoundException;
+import gr.nikolis.handlers.exception.ConflictException;
 import gr.nikolis.sql.repositories.AnimalRepository;
 import gr.nikolis.sql.repositories.SpecieRepository;
 import gr.nikolis.utils.MessageBean;
@@ -60,7 +60,7 @@ public class AnimalService implements IService<Animal> {
         try {
             return animalRepository.saveAndFlush(animal);
         } catch (Exception ex) {
-            throw new ConflictException("Conflict on SQL Statement while trying to save object!!");
+            throw new ConflictException("Conflict on SQL Statement while trying to save object!! : \n " + ex.getMessage());
         }
     }
 

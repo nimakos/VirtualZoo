@@ -1,8 +1,8 @@
 package gr.nikolis.handlers;
 
-import gr.nikolis.sql.handlers.AnimalNotFoundException;
-import gr.nikolis.sql.handlers.ConflictException;
-import gr.nikolis.sql.handlers.model.ExceptionResponse;
+import gr.nikolis.handlers.exception.AnimalNotFoundException;
+import gr.nikolis.handlers.exception.ConflictException;
+import gr.nikolis.handlers.exception.model.ExceptionResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
