@@ -60,7 +60,7 @@ public class AnimalService implements IService<Animal> {
         try {
             return animalRepository.saveAndFlush(animal);
         } catch (Exception ex) {
-            throw new ConflictException("Conflict on SQL Statement while trying to save object!! : \n " + ex.getMessage());
+            throw new ConflictException("Conflict on SQL Statement while trying to save object!! : " + ex.getMessage());
         }
     }
 

@@ -1,5 +1,7 @@
 package gr.nikolis.sql.dao;
 
+import gr.nikolis.handlers.validations.AnimalNameQualifier;
+import gr.nikolis.handlers.validations.custom.FieldsValueMatch;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,12 +19,19 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 //@JsonIgnoreProperties({"tricksSet"})
+@FieldsValueMatch.List({
+        @FieldsValueMatch(
+                field = "name",
+                fieldMatch = "specie"
+        )
+})
 public class Animal implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "animal_name")
+    @AnimalNameQualifier
     private String name;
 
     @Column(name = "animal_species")
