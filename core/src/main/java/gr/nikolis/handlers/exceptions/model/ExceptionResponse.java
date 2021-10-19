@@ -1,4 +1,4 @@
-package gr.nikolis.handlers.exception.model;
+package gr.nikolis.handlers.exceptions.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

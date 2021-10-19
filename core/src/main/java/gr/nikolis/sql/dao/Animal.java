@@ -1,6 +1,6 @@
 package gr.nikolis.sql.dao;
 
-import gr.nikolis.handlers.validations.AnimalNameQualifier;
+import gr.nikolis.handlers.validations.AnimalName;
 import gr.nikolis.handlers.validations.custom.FieldsValueMatch;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,7 +31,7 @@ public class Animal implements Serializable {
     private Long id;
 
     @Column(name = "animal_name")
-    @AnimalNameQualifier
+    @AnimalName
     private String name;
 
     @Column(name = "animal_species")

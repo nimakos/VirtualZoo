@@ -1,0 +1,10 @@
+<CsvModel>
+    <id>1</id>
+    <username>vaggelis</username>
+    <password>123</password>
+    <accessToken>234fd</accessToken>
+    <myData>
+        <firstname>lalakos</firstname>
+        <lastname>malakakos</lastname>
+    </myData>
+</CsvModel>

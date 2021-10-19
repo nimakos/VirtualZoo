@@ -3,9 +3,9 @@ package gr.nikolis.handlers.validations;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class AnimalNameValidator implements ConstraintValidator<AnimalNameQualifier, String> {
+public class AnimalNameValidator implements ConstraintValidator<AnimalName, String> {
     @Override
-    public void initialize(AnimalNameQualifier constraintAnnotation) {
+    public void initialize(AnimalName constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 

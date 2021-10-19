@@ -8,7 +8,7 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = AnimalNameValidator.class)
 @Target( { ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface AnimalNameQualifier {
+public @interface AnimalName {
     String message() default "Invalid animal name";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
