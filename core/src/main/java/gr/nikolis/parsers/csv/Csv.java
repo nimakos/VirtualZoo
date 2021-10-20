@@ -32,7 +32,7 @@ public class Csv {
      * @param <T>      The object to Serialize
      * @return The list with csv elements
      */
-    public <T> List<T> toList(Class<T> type, String fileName) {
+    public <T> List<T> toListFromFile(Class<T> type, String fileName) {
         CsvSchema schema = CsvSchema.emptySchema().withHeader().withColumnSeparator(',');
         try (InputStream inputStream = new ClassPathResource(fileName).getInputStream()) {
             MappingIterator<T> readValues = mapper
@@ -58,7 +58,7 @@ public class Csv {
      * @param filename The filename to write
      * @param <T>      The Type of class object
      */
-    public <T> void toCsv(Class<T> type, Object value, String filename) {
+    public <T> void toCsvFile(Class<T> type, Object value, String filename) {
         try {
             String userHomeFolder = System.getProperty("user.home");
             File textFile = new File(userHomeFolder, filename);

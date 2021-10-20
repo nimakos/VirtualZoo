@@ -27,11 +27,11 @@ public class MyJsonParser extends Parser {
     //@Scheduled(cron = "* * * * * *") //Run every second
     @Override
     public void run() {
-        List<CoronaDataLive> coronaDataLive = json.toList(CoronaDataLive.class, URL2, header);
+        List<CoronaDataLive> coronaDataLive = json.toListFromRest(CoronaDataLive.class, URL2, header);
         List<CoronaDataLive> processedData = process.processData(coronaDataLive);
         processedData.forEach(System.out::println);
 
-        CoronaDataSummary coronaDataSummary = json.toObject(CoronaDataSummary.class, URL1, header);
+        CoronaDataSummary coronaDataSummary = json.toObjectFromRest(CoronaDataSummary.class, URL1, header);
         String value = json.toJsonString(coronaDataSummary);
         System.out.println(value);
     }

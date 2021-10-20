@@ -1,6 +1,5 @@
 package gr.nikolis.parsers.strategy;
 
-
 import gr.nikolis.parsers.csv.Csv;
 import gr.nikolis.parsers.csv.CsvModel;
 import gr.nikolis.parsers.enums.ParserName;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-
 @Component
 public class MyCsvParser extends Parser {
 
@@ -19,8 +17,8 @@ public class MyCsvParser extends Parser {
 
     @Override
     public void run() {
-        List<CsvModel> csvModelList = csv.toList(CsvModel.class, "files/username.csv");
-        csv.toCsv(CsvModel.class, csvModelList, "final.csv");
+        List<CsvModel> csvModelList = csv.toListFromFile(CsvModel.class, "files/username.csv");
+        csv.toCsvFile(CsvModel.class, csvModelList, "final.csv");
     }
 
     @Override

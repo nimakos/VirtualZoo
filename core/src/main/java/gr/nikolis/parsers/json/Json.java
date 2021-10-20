@@ -31,7 +31,7 @@ public class Json {
      * @param <T>       The object to Serialize
      * @return List of object
      */
-    public <T> List<T> toList(Class<T> typeClass, String url, String... header) {
+    public <T> List<T> toListFromRest(Class<T> typeClass, String url, String... header) {
         try {
             String fetchedData = httpCall.restApiCall(url, header);
             CollectionType listType = mapper.getTypeFactory().constructCollectionType(ArrayList.class, typeClass);
@@ -55,7 +55,7 @@ public class Json {
      * @param <T>          The object to Serialize
      * @return The serialized object
      */
-    public <T> T toObject(Class<T> elementClass, String url, String... header) {
+    public <T> T toObjectFromRest(Class<T> elementClass, String url, String... header) {
         try {
             String fetchedData = httpCall.restApiCall(url, header);
             return mapper.readValue(fetchedData, elementClass);
