@@ -1,10 +1,10 @@
 package gr.nikolis.sql.services;
 
+import gr.nikolis.handlers.exceptions.AnimalNotFoundException;
+import gr.nikolis.handlers.exceptions.ConflictException;
 import gr.nikolis.sql.dao.Animal;
 import gr.nikolis.sql.dao.Specie;
 import gr.nikolis.sql.dao.Trick;
-import gr.nikolis.handlers.exceptions.AnimalNotFoundException;
-import gr.nikolis.handlers.exceptions.ConflictException;
 import gr.nikolis.sql.repositories.AnimalRepository;
 import gr.nikolis.sql.repositories.SpecieRepository;
 import gr.nikolis.utils.MessageBean;
@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -36,7 +35,6 @@ public class AnimalService implements IService<Animal> {
         return animalRepository.findAll();
     }
 
-    @Transactional(readOnly = true)
     public List<Animal> findAllByStream() {
         try (Stream<Animal> animalStream = animalRepository.findAllByStream()) {
             return animalStream.parallel().collect(Collectors.toList());
