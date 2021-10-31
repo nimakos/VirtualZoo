@@ -11,6 +11,6 @@ public class AnimalNameValidator implements ConstraintValidator<AnimalName, Stri
 
     @Override
     public boolean isValid(String animalNameField, ConstraintValidatorContext context) {
-        return animalNameField != null && animalNameField.length() > 3 && animalNameField.length() < 7;
+        return animalNameField != null && animalNameField.length() > 3 && animalNameField.length() < 10;
     }
 }

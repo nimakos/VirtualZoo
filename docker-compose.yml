@@ -19,12 +19,12 @@ services:
       # Where our data will be persisted
       - my-db:/var/lib/postgres
   web:
+    image: "virtualzoo-image"
     hostname: 'localhost'
     container_name: 'virtualzoo-container'
-    build: ./
-    image: "virtualzoo-image"
-    # Just link the database with the web application
     restart: 'always'
+    build: ./
+    # Just link the database with the web application
     links:
       - db:postgres
     ports:

@@ -1,6 +1,7 @@
 package gr.nikolis.config;
 
 import lombok.extern.slf4j.Slf4j;
+import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -15,10 +16,9 @@ import javax.sql.DataSource;
 @Configuration
 @PropertySources({
         @PropertySource("classpath:datasource.properties"),
-        //@PropertySource("classpath:env")
+        //@PropertySource("classpath:.env")
 })
 
-//@PropertySource("classpath:datasource.properties")
 @Slf4j
 public class DataSourceConfig {
 
@@ -37,6 +37,16 @@ public class DataSourceConfig {
 
     @Autowired
     private Environment env;
+
+    @Bean
+    public String getDataSourceURL() {
+        return "jdbc:" + getDatasourceApplicationName() + "://" + getDatasourceAddress() + "/" + getDatasourceDBName() + "?" +
+                "createDatabaseIfNotExist=true&" +
+                "serverTimezone=UTC&" +
+                "useUnicode=true&" +
+                "characterEncoding=utf8&" +
+                "allowPublicKeyRetrieval=true";
+    }
 
     @Bean
     public String getDatasourceApplicationName() {
@@ -96,14 +106,19 @@ public class DataSourceConfig {
         String envDataSourceAddress = env.getProperty("DATASOURCE_DOCKER");
         String envDataSourceAddress2 = System.getenv("DATASOURCE_DOCKER");
         return DataSourceBuilder.create()
-                .url("jdbc:" + getDatasourceApplicationName() + "://" + getDatasourceAddress() + "/" + getDatasourceDBName() + "?" +
-                        "createDatabaseIfNotExist=true&" +
-                        "serverTimezone=UTC&" +
-                        "useUnicode=true&" +
-                        "characterEncoding=utf8&" +
-                        "allowPublicKeyRetrieval=true")
+                .url(getDataSourceURL())
                 .username(getDatasourceUserName())
                 .password(getDataSourcePassword())
                 .build();
+    }
+
+    @Bean
+    public Flyway migrationConfig() {
+        return Flyway
+                .configure()
+                .locations("classpath:db/migration/{vendor}")
+                .baselineOnMigrate(true)
+                .dataSource(getDataSourceURL(), getDatasourceUserName(), getDataSourcePassword())
+                .load();
     }
 }
