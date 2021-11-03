@@ -1,4 +1,4 @@
-package gr.nikolis.handlers.validations.custom;
+package gr.nikolis.handlers.validations.customValidator1;
 
 import gr.nikolis.sql.dao.Animal;
 import org.springframework.beans.BeanWrapperImpl;

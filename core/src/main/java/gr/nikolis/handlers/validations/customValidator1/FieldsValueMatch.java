@@ -1,4 +1,4 @@
-package gr.nikolis.handlers.validations.custom;
+package gr.nikolis.handlers.validations.customValidator1;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

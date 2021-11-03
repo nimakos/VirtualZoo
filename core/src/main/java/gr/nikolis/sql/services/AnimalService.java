@@ -50,7 +50,7 @@ public class AnimalService implements IService<Animal> {
 
     @Override
     public Animal findById(Long id) {
-        return animalRepository.findById(id).orElse(null);
+        return animalRepository.findById(id).orElseThrow(() -> new AnimalNotFoundException("id=" + id));
     }
 
     @Override
@@ -78,17 +78,18 @@ public class AnimalService implements IService<Animal> {
     public String learnTrick(Long animalId) {
         Animal animal = findById(animalId);
         String name = "";
-        if (animal != null) {
-            Specie specie = specieRepository.findBySpecieType(animal.getSpecie());
-            Set<Trick> tricksLearned = new HashSet<>(animal.getTricksSet());
-            Set<Trick> tricksToLearn = new HashSet<>(specie.getTricksSet());
-            tricksToLearn.removeAll(tricksLearned);
-            Trick trickToLearn = utils.random(tricksToLearn);
-            if (trickToLearn != null) {
-                animal.getTricksSet().add(trickToLearn);
-                saveOrUpdate(animal);
-                name = trickToLearn.getTrick();
-            }
+        if (animal == null)
+            throw new AnimalNotFoundException("id=" + animalId);
+
+        Specie specie = specieRepository.findBySpecieType(animal.getSpecie());
+        Set<Trick> tricksLearned = new HashSet<>(animal.getTricksSet());
+        Set<Trick> tricksToLearn = new HashSet<>(specie.getTricksSet());
+        tricksToLearn.removeAll(tricksLearned);
+        Trick trickToLearn = utils.random(tricksToLearn);
+        if (trickToLearn != null) {
+            animal.getTricksSet().add(trickToLearn);
+            saveOrUpdate(animal);
+            name = trickToLearn.getTrick();
         }
         return "{ \"learnedTrick\": \"" + name + "\"}";
     }

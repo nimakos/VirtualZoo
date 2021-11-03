@@ -1,12 +1,13 @@
 package gr.nikolis.sql.dao;
 
-import gr.nikolis.handlers.validations.AnimalName;
-import gr.nikolis.handlers.validations.custom.FieldsValueMatch;
+import gr.nikolis.handlers.validations.customValidator2.AnimalName;
+import gr.nikolis.handlers.validations.customValidator1.FieldsValueMatch;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,7 +20,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 //@JsonIgnoreProperties({"tricksSet"})
-@FieldsValueMatch.List({
+@FieldsValueMatch.List({ // for validations
         @FieldsValueMatch(
                 field = "name",
                 fieldMatch = "specie"
@@ -34,6 +35,7 @@ public class Animal implements Serializable {
     @AnimalName
     private String name;
 
+    @Size(min = 2, message = "Name should have at least 2 characters")
     @Column(name = "animal_species")
     private String specie;
 

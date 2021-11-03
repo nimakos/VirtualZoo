@@ -8,9 +8,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -26,15 +30,22 @@ public class AnimalController {
         return animalService.fillSpeciesList();
     }
 
-    @RequestMapping(value = "/{id}/getAnimal", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/getAnimal/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @Cacheable(value = "Animal", key = "#id") // this works only here
     public Animal getAnimal(@PathVariable(value = "id") long id) {
         return animalService.findById(id);
     }
 
     @RequestMapping(value = "/setAnimal", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Animal createAnimal(@RequestBody Animal animal) {
-        return animalService.saveOrUpdate(animal);
+    public ResponseEntity<?> createAnimal(@Valid @RequestBody Animal animal) {
+        Animal savedAnimal = animalService.saveOrUpdate(animal);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedAnimal.getId()).toUri();
+        return  ResponseEntity.created(location).build();
+        //return animalService.saveOrUpdate(animal);
     }
 
     @RequestMapping(value = "/group", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -42,17 +53,17 @@ public class AnimalController {
         return animalService.groupAnimals();
     }
 
-    @RequestMapping(value = "/{animalId}/doTrick", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/doTrick/{animalId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String getTrick(@PathVariable(value = "animalId") long animalId) {
         return animalService.animalRandomTrick(animalId);
     }
 
-    @RequestMapping(value = "/{animalId}/learnTrick", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/learnTrick/{animalId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public String learnTrick(@PathVariable(value = "animalId") long animalId) {
         return animalService.learnTrick(animalId);
     }
 
-    @RequestMapping(value = "/{animalId}/deleteAnimal", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/deleteAnimal/{animalId}", method = RequestMethod.DELETE)
     public MessageBean deleteAnimal(@PathVariable(value = "animalId") long animalId) {
         return animalService.deleteById(animalId);
     }
