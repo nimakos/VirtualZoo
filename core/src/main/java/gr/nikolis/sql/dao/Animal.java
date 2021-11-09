@@ -2,6 +2,8 @@ package gr.nikolis.sql.dao;
 
 import gr.nikolis.handlers.validations.customValidator2.AnimalName;
 import gr.nikolis.handlers.validations.customValidator1.FieldsValueMatch;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,6 +28,7 @@ import java.util.Set;
                 fieldMatch = "specie"
         )
 })
+@ApiModel(description = "Documentation about animal")
 public class Animal implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +36,7 @@ public class Animal implements Serializable {
 
     @Column(name = "animal_name")
     @AnimalName
+    @ApiModelProperty(notes="Documentation about this property")
     private String name;
 
     @Size(min = 2, message = "Name should have at least 2 characters")

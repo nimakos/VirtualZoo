@@ -7,7 +7,6 @@ import gr.nikolis.utils.MessageBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -24,22 +23,23 @@ public class AnimalController {
     @Autowired
     private AnimalService animalService;
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
     @Transactional(readOnly = true) // this works only here
     public List<Animal> getAnimals() {
         return animalService.fillSpeciesList();
     }
 
-    @RequestMapping(value = "/getAnimal/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/getAnimal/{id}", method = RequestMethod.GET)
     @Cacheable(value = "Animal", key = "#id") // this works only here
     public Animal getAnimal(@PathVariable(value = "id") long id) {
         return animalService.findById(id);
     }
 
-    @RequestMapping(value = "/setAnimal", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/setAnimal", method = RequestMethod.POST)
     public ResponseEntity<?> createAnimal(@Valid @RequestBody Animal animal) {
         Animal savedAnimal = animalService.saveOrUpdate(animal);
 
+        //return the URI location of the call to the Header
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -48,17 +48,17 @@ public class AnimalController {
         //return animalService.saveOrUpdate(animal);
     }
 
-    @RequestMapping(value = "/group", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/group", method = RequestMethod.GET)
     public List<String> getGroupedAnimals() {
         return animalService.groupAnimals();
     }
 
-    @RequestMapping(value = "/doTrick/{animalId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/doTrick/{animalId}", method = RequestMethod.GET)
     public String getTrick(@PathVariable(value = "animalId") long animalId) {
         return animalService.animalRandomTrick(animalId);
     }
 
-    @RequestMapping(value = "/learnTrick/{animalId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/learnTrick/{animalId}", method = RequestMethod.PUT)
     public String learnTrick(@PathVariable(value = "animalId") long animalId) {
         return animalService.learnTrick(animalId);
     }

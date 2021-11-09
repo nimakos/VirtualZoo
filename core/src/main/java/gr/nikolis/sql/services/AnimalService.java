@@ -78,8 +78,6 @@ public class AnimalService implements IService<Animal> {
     public String learnTrick(Long animalId) {
         Animal animal = findById(animalId);
         String name = "";
-        if (animal == null)
-            throw new AnimalNotFoundException("id=" + animalId);
 
         Specie specie = specieRepository.findBySpecieType(animal.getSpecie());
         Set<Trick> tricksLearned = new HashSet<>(animal.getTricksSet());

@@ -21,8 +21,7 @@ public class AsyncMethods {
     public void init() {
         //method1();
         //List<Animal> animals= animalService.findAllByStream();
-        animalService.learnTrick(2L);
-
+        //animalService.learnTrick(2L);
     }
 
     @Async(ThreadConfig.EXECUTOR)
