@@ -16,7 +16,7 @@ import javax.annotation.Nonnull;
 import java.util.Date;
 
 @ControllerAdvice
-public class CustomizedHandler extends ResponseEntityExceptionHandler {
+public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<?> handleAllExceptions(Exception ex, WebRequest request) {
