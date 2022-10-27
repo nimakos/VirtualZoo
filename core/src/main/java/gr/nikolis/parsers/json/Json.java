@@ -33,7 +33,7 @@ public class Json {
      */
     public <T> List<T> toListFromRest(Class<T> typeClass, String url, String... header) {
         try {
-            String fetchedData = httpCall.restApiCall(url, header);
+            String fetchedData = httpCall.get(url, header);
             CollectionType listType = mapper.getTypeFactory().constructCollectionType(ArrayList.class, typeClass);
             return mapper.readValue(fetchedData, listType);
         } catch (IOException ex) {
@@ -57,7 +57,7 @@ public class Json {
      */
     public <T> T toObjectFromRest(Class<T> elementClass, String url, String... header) {
         try {
-            String fetchedData = httpCall.restApiCall(url, header);
+            String fetchedData = httpCall.get(url, header);
             return mapper.readValue(fetchedData, elementClass);
         } catch (IOException ex) {
             log.error("Error occurred while Serializing object from json string value" + ex);

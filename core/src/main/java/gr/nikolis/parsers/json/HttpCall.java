@@ -11,7 +11,7 @@ import java.net.http.HttpResponse;
 @Service
 public class HttpCall {
 
-    protected String restApiCall(String url, String... header) throws IOException, InterruptedException {
+    protected String get(String url, String... header) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
